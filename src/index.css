@@ -1,0 +1,656 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 263.4 70% 50.4%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 240 4.9% 83.9%;
+    
+    --fuzzer-primary: rgb(139, 92, 246);
+    --fuzzer-secondary: rgb(124, 58, 237);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: 
+      radial-gradient(circle at top right, rgba(139, 92, 246, 0.1) 0%, rgba(0, 0, 0, 0) 70%),
+      radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+  }
+
+  /* Custom scrollbar for code and response areas */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-secondary rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-fuzzer-secondary;
+  }
+}
+
+/* Glassmorphism and other UI effects */
+.glass-card {
+  @apply backdrop-blur-md bg-white/5 border border-white/10 shadow-lg;
+}
+
+.neo-blur {
+  @apply backdrop-blur-md bg-black/40 border border-white/10;
+}
+
+.frost-panel {
+  @apply backdrop-blur-lg bg-white/5 border border-white/10 shadow-md;
+}
+
+.hover-scale {
+  @apply transition-transform duration-300 ease-out hover:scale-[1.02];
+}
+
+.hover-scale-sm {
+  @apply transition-transform duration-200 hover:scale-[1.01];
+}
+
+.shine-effect {
+  @apply relative overflow-hidden;
+}
+
+.shine-effect::after {
+  content: "";
+  @apply absolute top-0 -left-[100%] w-[50%] h-full bg-shimmer bg-no-repeat;
+  animation: shimmer 2s infinite;
+}
+
+.pulse-animation {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* New animation for tabs shimmer effect */
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* Additional animations for scan visualization */
+@keyframes scale-up {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Add animation for slow spin */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-scale-up {
+  animation: scale-up 0.4s ease-out forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.3s ease-out forwards;
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+.glow-success {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+}
+
+.glow-warning {
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+}
+
+.glow-error {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+}
+
+/* Animations */
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button and interactive elements */
+.button-glow {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.button-glow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.2), rgba(255,255,255,0));
+  transform: translateX(-100%);
+  animation: button-shine 3s infinite;
+  z-index: -1;
+}
+
+@keyframes button-shine {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Progress bar enhancements */
+.progress-gradient {
+  background: linear-gradient(90deg, #8B5CF6, #3B82F6);
+  background-size: 200% 200%;
+  animation: gradient-shift 2s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add scanner radar animation */
+@keyframes radar-scan {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-scan {
+  animation: radar-scan 4s linear infinite;
+}
+
+/* Add pulse wave effect */
+@keyframes pulse-wave {
+  0% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.pulse-wave {
+  animation: pulse-wave 2s ease-out infinite;
+}
+
+/* Add glitch animation for the security scan effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Add scanning line animation */
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scan-line-animation {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line-animation::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    rgba(46, 213, 115, 0), 
+    rgba(46, 213, 115, 0.5), 
+    rgba(46, 213, 115, 0.8), 
+    rgba(46, 213, 115, 0.5), 
+    rgba(46, 213, 115, 0)
+  );
+  box-shadow: 0 0 8px rgba(46, 213, 115, 0.5);
+  animation: scan-line 2s linear infinite;
+}
+
+/* Technical data flow animations */
+@keyframes data-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.data-flow-animation {
+  background: linear-gradient(90deg, 
+    rgba(46, 213, 115, 0.05) 25%, 
+    rgba(46, 213, 115, 0.1) 35%, 
+    rgba(46, 213, 115, 0.05) 45%
+  );
+  background-size: 200% 100%;
+  animation: data-flow 2s linear infinite;
+}
+
+/* Font import */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* Slow pulse animation for icons */
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Fix for recharts not correctly displaying on some browsers */
+.recharts-wrapper,
+.recharts-surface {
+  overflow: visible !important;
+}
+
+/* Animation for bouncing elements */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* Conical gradient animation for scanning effects */
+@keyframes rotate-gradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-gradient {
+  animation: rotate-gradient 4s linear infinite;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Scanning line animation */
+@keyframes scan-line {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.scan-line {
+  animation: scan-line 2s ease-in-out infinite;
+}
+
+/* Update to enhance the scanning line effect with a cybersecurity feel */
+.cyber-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-scan::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--fuzzer-primary), transparent);
+  animation: cyber-scan-h 3s infinite linear;
+  z-index: 20;
+}
+
+.cyber-scan::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--fuzzer-primary), transparent);
+  animation: cyber-scan-v 2.5s infinite linear;
+  z-index: 20;
+}
+
+@keyframes cyber-scan-h {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(300%);
+  }
+}
+
+@keyframes cyber-scan-v {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+/* Digital rain animation for matrix-like effect */
+@keyframes digital-rain {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+.digital-rain {
+  position: relative;
+}
+
+.digital-rain::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, 
+    rgba(139, 92, 246, 0), 
+    rgba(139, 92, 246, 0.05) 20%, 
+    rgba(139, 92, 246, 0)
+  );
+  background-size: 100% 300%;
+  animation: digital-rain 2s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Technical animations for enhanced dashboard */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch-animation {
+  animation: glitch 0.5s ease-in-out infinite;
+}
+
+@keyframes tech-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px 5px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(139, 92, 246, 0.5);
+  }
+}
+
+.tech-pulse {
+  animation: tech-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Animation delays */
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Technical gradients */
+.gradient-tech {
+  background: linear-gradient(120deg, #8B5CF6, #2563EB);
+}
+
+.gradient-threat {
+  background: linear-gradient(120deg, #F87171, #DC2626);
+}
+
+.gradient-success {
+  background: linear-gradient(120deg, #34D399, #059669);
+}
+
+/* Hover effects for dashboard items */
+.dashboard-item {
+  @apply border border-border rounded-lg p-4 transition-all;
+}
+
+.dashboard-item:hover {
+  @apply border-fuzzer-primary/50 shadow-[0_0_10px_0_rgba(139,92,246,0.3)];
+  transform: translateY(-2px);
+}
+
+/* Tech-inspired layered card effect */
+.card-tech {
+  position: relative;
+  z-index: 1;
+}
+
+.card-tech::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.2), rgba(0, 0, 0, 0));
+  transform: translate(5px, 5px);
+  pointer-events: none;
+}
